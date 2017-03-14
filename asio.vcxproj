@@ -152,6 +152,9 @@
   <ItemGroup>
     <ClInclude Include="io_pool.h" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="single_thread.sh" />
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>

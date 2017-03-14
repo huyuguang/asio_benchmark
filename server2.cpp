@@ -13,7 +13,7 @@
 
 namespace {
 
-const size_t kMaxStackSize = 100;
+const size_t kMaxStackSize = 10;
 
 class session : public std::enable_shared_from_this<session>
 {
