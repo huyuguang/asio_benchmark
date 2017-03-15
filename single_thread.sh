@@ -3,7 +3,7 @@
 #set -x
 
 killall asio_test.exe
-timeout=${timeout:-100}
+timeout=${timeout:-10}
 #bufsize=${bufsize:-16384}
 nothreads=1
 

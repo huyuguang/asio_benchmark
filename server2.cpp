@@ -46,7 +46,7 @@ public:
     }
 
     void write(char* buffer, size_t len) {
-        asio::async_write(socket_, asio::buffer(buffer, len),
+        socket_.async_write_some(asio::buffer(buffer, len),
             [this, self = shared_from_this(), buffer](
                 const asio::error_code& err, size_t cb) {
             bool need_read = buffers_.empty();
