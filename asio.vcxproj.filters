@@ -33,12 +33,21 @@
     <ClCompile Include="io_pool.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
+    <ClCompile Include="socketpair.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Text Include="Makefile" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="io_pool.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="base.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="clock.h">
       <Filter>头文件</Filter>
     </ClInclude>
   </ItemGroup>

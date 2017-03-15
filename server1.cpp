@@ -13,7 +13,7 @@
 
 namespace {
 
-class session : public std::enable_shared_from_this<session>
+class session : public std::enable_shared_from_this<session>, noncopyable
 {
 public:
     session(asio::io_service& ios, size_t block_size)
@@ -66,7 +66,7 @@ private:
     char* buffer_;
 };
 
-class server
+class server : noncopyable
 {
 public:
     server(int thread_count, const asio::ip::tcp::endpoint& endpoint,

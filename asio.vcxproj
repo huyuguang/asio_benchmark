@@ -148,8 +148,11 @@
     <ClCompile Include="main.cpp" />
     <ClCompile Include="server1.cpp" />
     <ClCompile Include="server2.cpp" />
+    <ClCompile Include="socketpair.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="base.h" />
+    <ClInclude Include="clock.h" />
     <ClInclude Include="io_pool.h" />
   </ItemGroup>
   <ItemGroup>

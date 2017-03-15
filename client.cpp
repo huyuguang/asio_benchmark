@@ -50,7 +50,7 @@ private:
     int timeout_;
 };
 
-class session
+class session : noncopyable
 {
 public:
     session(asio::io_service& ios, size_t block_size)
@@ -150,7 +150,7 @@ private:
     bool want_close_ = false;
 };
 
-class client
+class client : noncopyable
 {
 public:
     client(int thread_count,

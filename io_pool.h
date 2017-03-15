@@ -1,14 +1,9 @@
 #pragma once
 
-#define ASIO_STANDALONE
-#define ASIO_HAS_STD_CHRONO
-
-#include <asio.hpp>
-#include <vector>
-#include <memory>
+#include "base.h"
 
 /// A pool of io_service objects.
-class io_service_pool {
+class io_service_pool : noncopyable {
 public:
     /// Construct the io_service pool.
     explicit io_service_pool(std::size_t pool_size);

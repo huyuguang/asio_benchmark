@@ -15,7 +15,7 @@ namespace {
 
 const size_t kMaxStackSize = 10;
 
-class session : public std::enable_shared_from_this<session>
+class session : public std::enable_shared_from_this<session>, noncopyable
 {
 public:
     session(asio::io_service& ios, size_t block_size)
@@ -46,7 +46,7 @@ public:
     }
 
     void write(char* buffer, size_t len) {
-        socket_.async_write_some(asio::buffer(buffer, len),
+        asio::async_write(socket_, asio::buffer(buffer, len),
             [this, self = shared_from_this(), buffer](
                 const asio::error_code& err, size_t cb) {
             bool need_read = buffers_.empty();
@@ -91,7 +91,7 @@ private:
     std::stack<char*> buffers_;
 };
 
-class server
+class server : noncopyable
 {
 public:
     server(int thread_count, const asio::ip::tcp::endpoint& endpoint,

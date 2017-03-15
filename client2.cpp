@@ -13,7 +13,8 @@
 #include <queue>
 #include <stack>
 #include <thread>
-    
+#include "base.h"
+
 namespace {
 
 class stats
@@ -58,7 +59,7 @@ private:
 
 const size_t kMaxStackSize = 10;
 
-class session
+class session : noncopyable
 {
 public:
     session(asio::io_service& ios, size_t block_size)
@@ -81,7 +82,7 @@ public:
     }
 
     void write(char* buffer, size_t len) {
-        socket_.async_write_some(asio::buffer(buffer, len),
+        asio::async_write(socket_, asio::buffer(buffer, len),
             [this, buffer](const asio::error_code& err, size_t cb) {
             bool need_read = buffers_.empty();
             buffers_.push(buffer);
@@ -183,7 +184,7 @@ private:
     bool want_close_ = false;
 };
 
-class client
+class client : noncopyable
 {
 public:
     client(int thread_count,
