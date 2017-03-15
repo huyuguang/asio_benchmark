@@ -148,6 +148,7 @@
     <ClCompile Include="io_pool.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="posttask.cpp" />
+    <ClCompile Include="posttask2.cpp" />
     <ClCompile Include="server1.cpp" />
     <ClCompile Include="server2.cpp" />
     <ClCompile Include="server3.cpp" />

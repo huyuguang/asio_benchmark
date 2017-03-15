@@ -19,10 +19,12 @@ public:
     }
 
     void start() {
-        uint32_t* thread_index = new uint32_t(0);
-        uint64_t* count = new uint64_t(0);
         start_time_ = clock_us();
-        post(thread_index, count);        
+
+        for (int i = 0; i < thread_count_ / 2; ++i) {
+            post(i*2);
+        }
+        
     }
 
     void wait() {
@@ -34,17 +36,20 @@ public:
     }
 private:
 
-    void post(uint32_t* thread_index, uint64_t* count) {
-        service_pool_.get_io_service(*thread_index).post(
-            [this, thread_index, count]() {
-            ++(*count);
-            ++(*thread_index);
-            if (*count == post_count_) {
-                delete thread_index;
-                delete count;
+    void post(int thread_index) {
+        service_pool_.get_io_service(thread_index).post(
+            [this, thread_index]() mutable {
+            ++count_;
+            if (count_ >= post_count_) {
                 stop();
             } else {
-                post(thread_index, count);
+                if (thread_index % 2) {
+                    thread_index -= 1;
+                } else {
+                    thread_index += 1;
+                }
+
+                post(thread_index);
             }
         });
     }
@@ -57,13 +62,16 @@ private:
     int const thread_count_;
     uint64_t const post_count_;
     io_service_pool service_pool_;
+    std::atomic<uint64_t> count_{ 0 };
     uint64_t start_time_;
     uint64_t stop_time_;
 };
 } // namespace 
 
-void posttask_test1(int thread_count, uint64_t post_count) {
+void posttask_test2(int thread_count, uint64_t post_count) {
     post_task p(thread_count, post_count);
+    if (thread_count < 2 || thread_count % 2)
+        throw std::runtime_error("thread_count must >2 && %2 == 0");
     p.start();
     p.wait();
     std::cout << "use time(us): " << p.use_time() << "\n";

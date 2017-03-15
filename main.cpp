@@ -28,7 +28,9 @@ void client_test3(int thread_count, char const* host, char const* port,
 void server_test3(int thread_count, char const* host, char const* port,
     size_t total_count);
 
-void posttask_test(int thread_count, uint64_t post_count);
+void posttask_test1(int thread_count, uint64_t post_count);
+
+void posttask_test2(int thread_count, uint64_t post_count);
 
 int usage() {
     std::cerr << "Usage: asio_test socketpair <pair_count> <active_count>"
@@ -45,7 +47,8 @@ int usage() {
         " <totalcount> <sessions>\n";
     std::cerr << "Usage: asio_test server3 <address> <port> <threads>"
         " <totalcount>\n";
-    std::cerr << "Usage: asio_test posttask <threads> <totalcount>\n";
+    std::cerr << "Usage: asio_test posttask1 <threads> <totalcount>\n";
+    std::cerr << "Usage: asio_test posttask2 <threads> <totalcount>\n";
     return 1;
 }
 
@@ -98,7 +101,9 @@ int main(int argc, char* argv[])
         return usage();
     if (!strcmp(argv[1], "server3") && argc != 6)
         return usage();
-    if (!strcmp(argv[1], "posttask") && argc != 4)
+    if (!strcmp(argv[1], "posttask1") && argc != 4)
+        return usage();
+    if (!strcmp(argv[1], "posttask2") && argc != 4)
         return usage();
 
     if (!strcmp(argv[1], "socketpair")) {
@@ -147,10 +152,14 @@ int main(int argc, char* argv[])
         int thread_count = atoi(argv[4]);
         uint32_t total_count = atoi(argv[5]);
         server_test3(thread_count, host, port, total_count);
-    } else if (!strcmp(argv[1], "posttask")) {
+    } else if (!strcmp(argv[1], "posttask1")) {
         int thread_count = atoi(argv[2]);
         uint64_t total_count = strtoull(argv[3], nullptr, 10);
-        posttask_test(thread_count, total_count);
+        posttask_test1(thread_count, total_count);
+    } else if (!strcmp(argv[1], "posttask2")) {
+        int thread_count = atoi(argv[2]);
+        uint64_t total_count = strtoull(argv[3], nullptr, 10);
+        posttask_test2(thread_count, total_count);
     } else {
         return usage();
     }
