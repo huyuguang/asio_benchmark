@@ -1,3 +1,4 @@
+#define ASIO_HAS_LOCAL_SOCKETS
 #include <iostream>
 #include "base.h"
 #include "clock.h"
@@ -40,9 +41,8 @@ public:
     void start() {
         start_time_ = clock_us();// high_res_clock();
         size_t space = pair_count_ / active_count_;
-        space *= 2;
         for (size_t i = 0; i < active_count_; ++i) {
-            size_t index = (i * space + 1) % pair_count_;
+            size_t index = i;// i * space;
             pair_write(index, &first_ch_);
         }
     }
@@ -53,17 +53,18 @@ public:
 private:
     void pair_read(size_t i) {
         auto ptr = ptrs_[i].get();
-        ptr->s2_.async_read_some(asio::buffer(&ptr->data_, 1),
+        asio::async_read(ptr->s2_, asio::buffer(&ptr->data_, 1),
             [this, ptr, i](const asio::error_code& err, size_t cb) {
             if (!err) {
                 ++real_read_count_;
+                pair_read(i);
+
                 if (real_read_count_ < write_count_) {
                     size_t next_i = i + 1;
                     if (next_i >= pair_count_)
                         next_i -= pair_count_;
-                    pair_write(next_i, &ptr->data_);
-                    pair_read(i);
-                } else {
+                    pair_write(next_i, &ptr->data_);                    
+                } else if (real_read_count_ == real_write_count_) {
                     stop();
                 }
             }
@@ -72,12 +73,15 @@ private:
 
     void pair_write(size_t i, char const* data) {
         auto ptr = ptrs_[i].get();
-        ptr->s1_.async_write_some(asio::buffer(data, 1),
-            [this](const asio::error_code& err, size_t cb) {
-            if (!err) {
-                ++real_write_count_;
-            }
-        });
+        //asio::async_write(ptr->s1_, asio::buffer(data, 1),
+        //    [this](const asio::error_code& err, size_t cb) {
+        //    if (!err) {
+        //        ++real_write_count_;
+        //    }
+        //});
+
+        asio::write(ptr->s1_, asio::buffer(data, 1));
+        ++real_write_count_;
     }
 
     void stop() {
