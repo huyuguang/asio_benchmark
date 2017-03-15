@@ -13,6 +13,7 @@
 
 namespace {
 
+#pragma pack(push,1)
 struct Header {
     uint32_t body_size_; // net order
     uint32_t packet_count_; // net order
@@ -27,6 +28,7 @@ struct Header {
         packet_count_ = htonl(count);
     }
 };
+#pragma pack(pop)
 
 class session : public std::enable_shared_from_this<session>, noncopyable
 {
