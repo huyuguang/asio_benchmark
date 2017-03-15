@@ -17,6 +17,7 @@ public:
     /// Get an io_service to use.
     asio::io_service& get_io_service();
 
+    asio::io_service& get_io_service(size_t index);
 private:
     typedef std::shared_ptr<asio::io_service> io_service_ptr;
     typedef std::shared_ptr<asio::io_service::work> work_ptr;

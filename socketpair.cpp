@@ -1,4 +1,4 @@
-#define ASIO_HAS_LOCAL_SOCKETS
+
 #include <iostream>
 #include "base.h"
 #include "clock.h"

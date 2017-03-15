@@ -53,3 +53,8 @@ asio::io_service& io_service_pool::get_io_service()
         next_io_service_ = 0;
     return io_service;
 }
+
+asio::io_service& io_service_pool::get_io_service(size_t index) {
+    index = index % io_services_.size();
+    return *io_services_[index];
+}
