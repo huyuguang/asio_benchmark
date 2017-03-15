@@ -1,8 +1,8 @@
-#define ASIO_HAS_LOCAL_SOCKETS
 #include <iostream>
 #include "base.h"
 #include "clock.h"
 
+#ifdef ASIO_HAS_LOCAL_SOCKETS
 using asio::local::stream_protocol;
 
 namespace {
@@ -99,8 +99,8 @@ private:
     size_t real_read_count_ = 0;
     size_t real_write_count_ = 0;
     char first_ch_ = 'm';
-    uint64_t start_time_;
-    uint64_t stop_time_;
+    uint64_t start_time_ = 0;
+    uint64_t stop_time_ = 0;
 };
 
 } // namespace
@@ -121,3 +121,9 @@ void socket_pair_test(size_t pair_count, size_t active_count,
     uint64_t average_use_time = total_time / (test_times - 1);
     std::cout << "average time: " << average_use_time << "us\n";
 }
+#else // #ifdef ASIO_HAS_LOCAL_SOCKETS
+void socket_pair_test(size_t pair_count, size_t active_count,
+    size_t write_count) {
+    std::cout << "windows does not support socket pair\n";
+}
+#endif // #ifdef ASIO_HAS_LOCAL_SOCKETS

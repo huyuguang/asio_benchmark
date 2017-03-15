@@ -36,6 +36,12 @@
     <ClCompile Include="socketpair.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
+    <ClCompile Include="server3.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="client3.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Text Include="Makefile" />
@@ -53,5 +59,6 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="single_thread.sh" />
+    <None Include="multiple_threads.sh" />
   </ItemGroup>
 </Project>

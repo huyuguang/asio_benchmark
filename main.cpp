@@ -22,16 +22,27 @@ void server_test2(int thread_count, char const* host, char const* port,
 void socket_pair_test(size_t pair_count, size_t active_count,
     size_t write_count);
 
+void client_test3(int thread_count, char const* host, char const* port,
+    size_t total_count, size_t session_count);
+
+void server_test3(int thread_count, char const* host, char const* port,
+    size_t total_count);
+
 int usage() {
     std::cerr << "Usage: asio_test socketpair <pair_count> <active_count>"
         " <write_count>\n";
-    std::cerr << "Usage: asio_test client <host> <port> <threads>"
-        " <blocksize> <sessions> <time> <type>[1/2]\n";
-    std::cerr << "Usage: asio_test server <address> <port> <threads>"
-        " <blocksize> <type>[1/2]\n";
-    std::cerr << "type1: single buffer\n";
-    std::cerr << "type2: multiple buffers\n";
-
+    std::cerr << "Usage: asio_test client1 <host> <port> <threads>"
+        " <blocksize> <sessions> <time>\n";
+    std::cerr << "Usage: asio_test server1 <address> <port> <threads>"
+        " <blocksize>\n";
+    std::cerr << "Usage: asio_test client2 <host> <port> <threads>"
+        " <blocksize> <sessions> <time>\n";
+    std::cerr << "Usage: asio_test server2 <address> <port> <threads>"
+        " <blocksize>\n";
+    std::cerr << "Usage: asio_test client3 <host> <port> <threads>"
+        " <totalcount> <sessions>\n";
+    std::cerr << "Usage: asio_test server3 <address> <port> <threads>"
+        " <totalcount>\n";
     return 1;
 }
 
@@ -67,51 +78,72 @@ int main(int argc, char* argv[])
 
     using namespace std; // For atoi.
 
-    if (argc != 5 && argc != 9 && argc != 7) {
+    if (argc < 2)
         return usage();
-    }
 
-    if (argc == 5 && strcmp(argv[1], "socketpair")) {
+    if (!strcmp(argv[1], "socketpair") && argc != 5)
         return usage();
-    }
-
-    if (argc == 9 && strcmp(argv[1], "client")) {
+    if (!strcmp(argv[1], "client1") && argc != 8)
         return usage();
-    }
-
-    if (argc == 7 && strcmp(argv[1], "server")) {
+    if (!strcmp(argv[1], "server1") && argc != 6)
         return usage();
-    }
+    if (!strcmp(argv[1], "client2") && argc != 8)
+        return usage();
+    if (!strcmp(argv[1], "server2") && argc != 6)
+        return usage();
+    if (!strcmp(argv[1], "client3") && argc != 7)
+        return usage();
+    if (!strcmp(argv[1], "server3") && argc != 6)
+        return usage();
 
-    if (argc == 5) {
+    if (!strcmp(argv[1], "socketpair")) {
         size_t pair_count = atoi(argv[2]);
         size_t active_count = atoi(argv[3]);
         size_t write_count = atoi(argv[4]);
         socket_pair_test(pair_count, active_count, write_count);
-    } else if (argc == 9) {        
+    } else if (!strcmp(argv[1], "client1")) {
         const char* host = argv[2];
         const char* port = argv[3];
         int thread_count = atoi(argv[4]);
         size_t block_size = atoi(argv[5]);
         size_t session_count = atoi(argv[6]);
         int timeout = atoi(argv[7]);
-        int type = atoi(argv[8]);
-        if (type == 1) {
-            client_test1(thread_count, host, port, block_size, session_count, timeout);
-        } else if (type == 2) {
-            client_test2(thread_count, host, port, block_size, session_count, timeout);
-        }
-    } else {
+        client_test1(thread_count, host, port, block_size, session_count, timeout);
+    } else if (!strcmp(argv[1], "client2")) {
         const char* host = argv[2];
         const char* port = argv[3];
         int thread_count = atoi(argv[4]);
         size_t block_size = atoi(argv[5]);
-        int type = atoi(argv[6]);
-        if (type == 1) {
-            server_test1(thread_count, host, port, block_size);
-        } else if (type == 2) {
-            server_test2(thread_count, host, port, block_size);
-        }
+        size_t session_count = atoi(argv[6]);
+        int timeout = atoi(argv[7]);
+        client_test2(thread_count, host, port, block_size, session_count, timeout);
+    } else if (!strcmp(argv[1], "server1")) {
+        const char* host = argv[2];
+        const char* port = argv[3];
+        int thread_count = atoi(argv[4]);
+        size_t block_size = atoi(argv[5]);
+        server_test1(thread_count, host, port, block_size);
+    } else if (!strcmp(argv[1], "server2")) {
+        const char* host = argv[2];
+        const char* port = argv[3];
+        int thread_count = atoi(argv[4]);
+        size_t block_size = atoi(argv[5]);
+        server_test2(thread_count, host, port, block_size);
+    } else if (!strcmp(argv[1], "client3")) {
+        const char* host = argv[2];
+        const char* port = argv[3];
+        int thread_count = atoi(argv[4]);
+        uint32_t total_count = atoi(argv[5]);
+        size_t session_count = atoi(argv[6]);
+        client_test3(thread_count, host, port, total_count, session_count);
+    } else if (!strcmp(argv[1], "server3")) {
+        const char* host = argv[2];
+        const char* port = argv[3];
+        int thread_count = atoi(argv[4]);
+        uint32_t total_count = atoi(argv[5]);
+        server_test3(thread_count, host, port, total_count);
+    } else {
+        return usage();
     }
 
     return 0;

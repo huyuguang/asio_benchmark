@@ -131,11 +131,10 @@ public:
         socket_.async_connect(endpoint, [this](const asio::error_code& err) {
             if (!err)
             {
-                //asio::ip::tcp::no_delay no_delay(true);
-                //socket_.set_option(no_delay);
+                asio::ip::tcp::no_delay no_delay(true);
+                socket_.set_option(no_delay);
 
                 read();
-
                 // write first packet
                 auto buffer = buffers_.top();
                 buffers_.pop();

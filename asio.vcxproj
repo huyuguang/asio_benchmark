@@ -144,10 +144,12 @@
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
     </ClCompile>
     <ClCompile Include="client2.cpp" />
+    <ClCompile Include="client3.cpp" />
     <ClCompile Include="io_pool.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="server1.cpp" />
     <ClCompile Include="server2.cpp" />
+    <ClCompile Include="server3.cpp" />
     <ClCompile Include="socketpair.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -156,6 +158,7 @@
     <ClInclude Include="io_pool.h" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="multiple_threads.sh" />
     <None Include="single_thread.sh" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

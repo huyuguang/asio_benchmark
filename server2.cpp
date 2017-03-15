@@ -40,8 +40,8 @@ public:
     }
 
     void start() {
-        //asio::ip::tcp::no_delay no_delay(true);
-        //socket_.set_option(no_delay);
+        asio::ip::tcp::no_delay no_delay(true);
+        socket_.set_option(no_delay);
         read();
     }
 
