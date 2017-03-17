@@ -140,14 +140,14 @@
     <Text Include="Makefile" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="client.cpp">
+    <ClCompile Include="client1.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
     </ClCompile>
     <ClCompile Include="client2.cpp" />
     <ClCompile Include="client3.cpp" />
     <ClCompile Include="io_pool.cpp" />
     <ClCompile Include="main.cpp" />
-    <ClCompile Include="posttask.cpp" />
+    <ClCompile Include="posttask1.cpp" />
     <ClCompile Include="posttask2.cpp" />
     <ClCompile Include="posttask3.cpp" />
     <ClCompile Include="posttask4.cpp" />

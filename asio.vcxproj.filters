@@ -15,9 +15,6 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="client.cpp">
-      <Filter>源文件</Filter>
-    </ClCompile>
     <ClCompile Include="client2.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
@@ -42,9 +39,6 @@
     <ClCompile Include="client3.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
-    <ClCompile Include="posttask.cpp">
-      <Filter>源文件</Filter>
-    </ClCompile>
     <ClCompile Include="posttask2.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
@@ -55,6 +49,12 @@
       <Filter>源文件</Filter>
     </ClCompile>
     <ClCompile Include="posttask5.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="client1.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="posttask1.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
   </ItemGroup>
