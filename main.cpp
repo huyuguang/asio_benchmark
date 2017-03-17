@@ -32,6 +32,10 @@ void posttask_test1(int thread_count, uint64_t post_count);
 
 void posttask_test2(int thread_count, uint64_t post_count);
 
+void posttask_test3(uint64_t post_count);
+
+void posttask_test4(uint64_t post_count);
+
 int usage() {
     std::cerr << "Usage: asio_test socketpair <pair_count> <active_count>"
         " <write_count>\n";
@@ -49,6 +53,8 @@ int usage() {
         " <totalcount>\n";
     std::cerr << "Usage: asio_test posttask1 <threads> <totalcount>\n";
     std::cerr << "Usage: asio_test posttask2 <threads> <totalcount>\n";
+    std::cerr << "Usage: asio_test posttask3 <totalcount>\n";
+    std::cerr << "Usage: asio_test posttask4 <totalcount>\n";
     return 1;
 }
 
@@ -105,6 +111,10 @@ int main(int argc, char* argv[])
         return usage();
     if (!strcmp(argv[1], "posttask2") && argc != 4)
         return usage();
+    if (!strcmp(argv[1], "posttask3") && argc != 3)
+        return usage();
+    if (!strcmp(argv[1], "posttask4") && argc != 3)
+        return usage();
 
     if (!strcmp(argv[1], "socketpair")) {
         size_t pair_count = atoi(argv[2]);
@@ -160,6 +170,12 @@ int main(int argc, char* argv[])
         int thread_count = atoi(argv[2]);
         uint64_t total_count = strtoull(argv[3], nullptr, 10);
         posttask_test2(thread_count, total_count);
+    } else if (!strcmp(argv[1], "posttask3")) {
+        uint64_t total_count = strtoull(argv[2], nullptr, 10);
+        posttask_test3(total_count);
+    } else if (!strcmp(argv[1], "posttask4")) {
+        uint64_t total_count = strtoull(argv[2], nullptr, 10);
+        posttask_test4(total_count);
     } else {
         return usage();
     }

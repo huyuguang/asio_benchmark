@@ -149,6 +149,8 @@
     <ClCompile Include="main.cpp" />
     <ClCompile Include="posttask.cpp" />
     <ClCompile Include="posttask2.cpp" />
+    <ClCompile Include="posttask3.cpp" />
+    <ClCompile Include="posttask4.cpp" />
     <ClCompile Include="server1.cpp" />
     <ClCompile Include="server2.cpp" />
     <ClCompile Include="server3.cpp" />

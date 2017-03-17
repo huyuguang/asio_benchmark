@@ -176,7 +176,7 @@ public:
         std::cout << "failed count: " << error_count << "\n";
         std::cout << "finished count: " << finished_count << "\n";
         std::cout << "average time(us): " <<
-            (double)total_time / finished_count << "\n";
+            (uint64_t)((double)total_time / finished_count) << "\n";
     }
 
     void start() {

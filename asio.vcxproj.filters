@@ -48,6 +48,12 @@
     <ClCompile Include="posttask2.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
+    <ClCompile Include="posttask3.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="posttask4.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Text Include="Makefile" />
