@@ -37,8 +37,10 @@ Usage: asio_test posttask5 <totalcount>
 
 [huyuguang@dtrans1 ~/code/asio]$ ./asio_test.exe posttask3 10000000
 use time(us): 9077386
+
 [huyuguang@dtrans1 ~/code/asio]$ ./asio_test.exe posttask4 10000000
 use time(us): 638762
+
 [huyuguang@dtrans1 ~/code/asio]$ ./asio_test.exe posttask5 10000000
 use time(us): 4202412
 
