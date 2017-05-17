@@ -24,6 +24,7 @@ public:
         thread_ = std::thread([this]() {
             io_service_.run();
         });
+        //std::cout << "sizeof(Task): " << sizeof(Task) << "\n";
         pending_tasks_.reserve((uint32_t)post_count);
         temp_tasks_.reserve((uint32_t)post_count);
     }
