@@ -4,17 +4,29 @@ asio性能测试程序集
 支持windows和linux平台。
 
 Usage: asio_test socketpair <pair_count> <active_count> <write_count>
+
 Usage: asio_test client1 <host> <port> <threads> <blocksize> <sessions> <time>
+  
 Usage: asio_test server1 <address> <port> <threads> <blocksize>
+  
 Usage: asio_test client2 <host> <port> <threads> <blocksize> <sessions> <time>
+  
 Usage: asio_test server2 <address> <port> <threads> <blocksize>
+  
 Usage: asio_test client3 <host> <port> <threads> <totalcount> <sessions>
+  
 Usage: asio_test server3 <address> <port> <threads> <totalcount>
+  
 Usage: asio_test posttask1 <threads> <totalcount>
+  
 Usage: asio_test posttask2 <threads> <totalcount>
+  
 Usage: asio_test posttask3 <totalcount>
+  
 Usage: asio_test posttask4 <totalcount>
+  
 Usage: asio_test posttask5 <totalcount>
+
 
 1，socketpair是测试socketpair的性能。
 
